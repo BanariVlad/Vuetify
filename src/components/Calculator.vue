@@ -80,6 +80,7 @@ export default {
         this.updateCurrentNumber(this.currentOperation);
         prevNumberOut.innerText = '';
         currentNumberOut.innerText = this.prevNumber;
+        this.currentOperation = '';
       }
     },
 
@@ -105,7 +106,7 @@ export default {
           this.prevNumber = Number(this.prevNumber) * Number(this.currentNumber);
         break;
         case '/':
-          if (this.currentNumber === '0') {
+          if (Number(this.currentNumber) === 0) {
             this.prevNumber = 'Error';
           } else {
             this.prevNumber = Number(this.prevNumber) / Number(this.currentNumber);
