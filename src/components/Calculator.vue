@@ -123,6 +123,7 @@ export default {
       document.querySelector('p.subheading').innerText = '';
       this.currentNumber = '';
       this.prevNumber = '';
+      this.currentOperation = '';
     }
   }
 };
