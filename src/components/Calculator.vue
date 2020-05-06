@@ -56,7 +56,6 @@ export default {
 
   methods: {
     clear() {
-      console.log("Clear");
       this.currentNumber = "";
       this.prevNumber = "";
       this.currentOperation = "";
@@ -90,7 +89,6 @@ export default {
   watch: {
     prevOperation() {
       if (this.prevOperation !== "") {
-        console.log("watch prevOperation");
         switch (this.prevOperation) {
           case "+":
             this.prevNumber = Number(this.prevNumber) + Number(this.currentNumber);
