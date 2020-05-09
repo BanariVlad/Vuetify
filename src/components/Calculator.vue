@@ -3,8 +3,8 @@
     <v-container class="align-self-center" style="width: 300px">
       <v-row>
         <v-btn small dark depressed fab class="clear cyan" @click="clear()">C</v-btn>
-        <p class="white caption">{{prevNumber}}</p>
         <p class="white display-1">{{currentNumber}}</p>
+        <p class="white display-1 grey--text">{{calculate}}</p>
       </v-row>
       <v-row class="cyan white--text">
         <v-col v-for="operation in operations" :key="operation" class="text-center">
@@ -86,30 +86,39 @@ export default {
     }
   },
 
-  watch: {
-    prevOperation() {
+  computed: {
+    calculate() {
       if (this.prevOperation !== "") {
+        let result = 0;
         switch (this.prevOperation) {
           case "+":
-            this.prevNumber = Number(this.prevNumber) + Number(this.currentNumber);
+            result = Number(this.prevNumber) + Number(this.currentNumber);
             break;
           case "-":
-            this.prevNumber = Number(this.prevNumber) - Number(this.currentNumber);
+            result = Number(this.prevNumber) - Number(this.currentNumber);
             break;
           case "*":
-            this.prevNumber = Number(this.prevNumber) * Number(this.currentNumber);
+            result = Number(this.prevNumber) * Number(this.currentNumber);
             break;
           case "/":
-            if (this.currentNumber !== "0") {
-              this.prevNumber = Number(this.prevNumber) / Number(this.currentNumber);
+            if (this.currentNumber === 0) {
+              result = Number(this.prevNumber) / Number(this.currentNumber);
             } else {
-              this.prevNumber = "Error";
+              result = "Error";
             }
             break;
         }
-        this.prevOperation = "";
-        this.currentNumber = "";
+        return result;
       }
+      return this.prevNumber;
+    }
+  },
+
+  watch: {
+    calculate() {
+      this.prevNumber = this.calculate;
+      this.currentNumber = "";
+      this.prevOperation = "";
     }
   }
 };
